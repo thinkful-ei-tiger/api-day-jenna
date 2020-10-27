@@ -4,7 +4,7 @@ import api from './api';
 import store from './store';
 
 const generateError = () => {
-  $('.error').html(`<p>[X] !! ERROR !! </p><p>${store.error}</p>`);
+  $('.error').html(`<p><button id="error">X</button> !! ERROR !! : ${store.error}</p>`);
 }
 
 const generateItemElement = function (item) {
@@ -67,6 +67,13 @@ const handleNewItemSubmit = function () {
     });
   });
 };
+
+const handleError = () => {
+  $('.container').on('click', '#error', event => {
+    $('.error').html("");
+    store.error = "";
+  })
+}
 
 const getItemIdFromElement = function (item) {
   return $(item)
@@ -134,6 +141,7 @@ const bindEventListeners = function () {
   handleDeleteItemClicked();
   handleEditShoppingItemSubmit();
   handleToggleFilterClick();
+  handleError();
 };
 // This object contains the only exposed methods from this module:
 export default {
